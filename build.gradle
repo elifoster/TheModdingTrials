@@ -23,8 +23,8 @@ plugins {
 version = "1.0.0"
 group= "com.gamepedia.ftb.bunnytech"
 archivesBaseName = "BunnyTech"
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 minecraft {
     version = "1.10.2-12.18.1.2011"
