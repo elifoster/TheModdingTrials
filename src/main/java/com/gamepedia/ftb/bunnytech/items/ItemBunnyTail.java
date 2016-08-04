@@ -3,6 +3,7 @@ package com.gamepedia.ftb.bunnytech.items;
 import com.gamepedia.ftb.bunnytech.BunnyTech;
 import com.gamepedia.ftb.bunnytech.client.model.ModelBunnyTail;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -23,6 +24,7 @@ public class ItemBunnyTail extends ItemArmor {
         super(materialIn, renderIndexIn, equipmentSlotIn);
         setUnlocalizedName(BunnyTech.MODID + ":bunny_tail");
         setRegistryName(BunnyTech.MODID, "bunny_tail");
+        setCreativeTab(CreativeTabs.MISC);
     }
 
     @Override
