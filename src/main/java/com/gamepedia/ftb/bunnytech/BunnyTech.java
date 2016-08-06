@@ -1,23 +1,22 @@
 package com.gamepedia.ftb.bunnytech;
 
 import com.gamepedia.ftb.bunnytech.blocks.BlockBasicGenerator;
+import com.gamepedia.ftb.bunnytech.container.GuiHandler;
 import com.gamepedia.ftb.bunnytech.items.ItemBunnyTail;
 import com.gamepedia.ftb.bunnytech.proxy.CommonProxy;
 
+import com.gamepedia.ftb.bunnytech.tileentity.TileEntityBasicGenerator;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(name = BunnyTech.NAME, modid = BunnyTech.MODID, version = BunnyTech.VERSION)
 public class BunnyTech {
@@ -33,6 +32,9 @@ public class BunnyTech {
 
     public static Item BUNNY_TAIL;
 
+    @Mod.Instance
+    public static BunnyTech INSTANCE;
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         BUNNY_TAIL = new ItemBunnyTail();
@@ -43,14 +45,16 @@ public class BunnyTech {
         GameRegistry.register(BASIC_GENERATOR);
         GameRegistry.register(IB_BASIC_GENERATOR.setRegistryName(BASIC_GENERATOR.getRegistryName()));
 
+        GameRegistry.registerTileEntity(TileEntityBasicGenerator.class, "basic_generator");
+
         proxy.registerModels();
     }
     
     @EventHandler
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(BUNNY_TAIL);
-        MinecraftForge.EVENT_BUS.register(BASIC_GENERATOR);
-        MinecraftForge.EVENT_BUS.register(IB_BASIC_GENERATOR);
-        MinecraftForge.EVENT_BUS.register(new DropsHandler()); 
+        MinecraftForge.EVENT_BUS.register(new DropsHandler());
+
+        NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, new GuiHandler());
     }
 }

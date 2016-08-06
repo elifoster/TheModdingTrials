@@ -1,8 +1,26 @@
 {
+    "forge_marker": 1,
+    "defaults": {
+        "model": "orientable",
+        "textures": {
+            "top": "bunnytech:blocks/basic_generator_side",
+            "front": "bunnytech:blocks/basic_generator_front",
+            "side": "bunnytech:blocks/basic_generator_side"
+        }
+    },
     "variants": {
-        "facing=north": { "model": "bunnytech:basic_generator" },
-        "facing=south": { "model": "bunnytech:basic_generator", "y": 180 },
-        "facing=west":  { "model": "bunnytech:basic_generator", "y": 270 },
-        "facing=east":  { "model": "bunnytech:basic_generator", "y": 90 }
+        "facing": {
+            "north": {},
+            "south": {
+                "y": 180
+            },
+            "west": {
+                "y": 270
+            },
+            "east": {
+                "y": 90
+            }
+        },
+        "inventory": [{}]
     }
 }
