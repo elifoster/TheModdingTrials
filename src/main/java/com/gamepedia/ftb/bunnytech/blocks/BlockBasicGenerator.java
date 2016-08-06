@@ -1,6 +1,7 @@
 package com.gamepedia.ftb.bunnytech.blocks;
 
 import com.gamepedia.ftb.bunnytech.BunnyTech;
+import com.gamepedia.ftb.bunnytech.tileentity.TileEntityBasicGenerator;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
@@ -93,6 +94,6 @@ public class BlockBasicGenerator extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta){
-		return null;
+		return new TileEntityBasicGenerator();
 	}
 }
