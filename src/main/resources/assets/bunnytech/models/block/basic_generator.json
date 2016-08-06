@@ -1,7 +1,7 @@
 {
     "parent": "block/orientable",
     "textures": {
-        "front": "bonytech:blocks/basic_generator_front",
-        "side": "bonytech:blocks/basic_generator_side"
+        "front": "bunnytech:blocks/basic_generator_front",
+        "side": "bunnytech:blocks/basic_generator_side"
     }
 }
