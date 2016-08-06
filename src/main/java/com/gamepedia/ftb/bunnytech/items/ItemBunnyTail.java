@@ -17,13 +17,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ItemBunnyTail extends ItemArmor {
     public ItemBunnyTail() {
-        this(ArmorMaterial.LEATHER, 0, EntityEquipmentSlot.LEGS);
-    }
-
-    public ItemBunnyTail(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
-        super(materialIn, renderIndexIn, equipmentSlotIn);
+        super(ArmorMaterial.LEATHER, 0, EntityEquipmentSlot.LEGS);
         setUnlocalizedName(BunnyTech.MODID + ":bunny_tail");
-        setRegistryName(BunnyTech.MODID, "bunny_tail");
+        setRegistryName("bunny_tail");
         setCreativeTab(CreativeTabs.MISC);
     }
 
