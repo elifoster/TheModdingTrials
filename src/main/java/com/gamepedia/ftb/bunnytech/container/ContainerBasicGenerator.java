@@ -8,7 +8,9 @@ import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnaceFuel;
+import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
@@ -85,6 +87,14 @@ public class ContainerBasicGenerator extends Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer player) {
-        return true;
+        return this.tileBasicGenerator.isUseableByPlayer(player);
+    }
+    
+    @Override
+    @Nullable
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index){//TODO
+    	ItemStack itemstack = null;
+    	Slot slot = (Slot)this.inventorySlots.get(index);
+    	return itemstack;
     }
 }

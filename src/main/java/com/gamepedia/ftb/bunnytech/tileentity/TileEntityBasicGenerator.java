@@ -49,15 +49,10 @@ public class TileEntityBasicGenerator extends TileEntityLockable implements ITic
 
     @Override
     public void setInventorySlotContents(int index, @Nullable ItemStack stack) {
-        boolean flag = stack != null && stack.isItemEqual(contents[index]) && ItemStack.areItemStackTagsEqual(stack, contents[index]);
-
-        if (stack != null && stack.stackSize > getInventoryStackLimit()) {
-			stack.stackSize = getInventoryStackLimit();
-		}
-
-        if (!flag) {
-            markDirty();
-        }
+    	contents[index] = stack;
+    	
+        
+        //System.out.println("yolo!");//Or should I say, golo! (funny JVM joke)
     }
 
     @Override
