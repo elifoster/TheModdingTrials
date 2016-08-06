@@ -80,20 +80,38 @@ public class TileEntityBasicGenerator extends TileEntityLockable implements ITic
 	}
 
 	@Override
-	public int getField(int id){ //Is this really used? I hope not
-		return 0;
+	public int getField(int id){
+		if(id <= 7)
+			return burnTime[id];
+		else if(id <= 14)
+			return currentItemBurnTime[id - 7]; //Hackyness for the win :D
+		else if(id == 15)
+			return (int)energy;
+		else
+			return 0;
 	}
 
 	@Override
-	public void setField(int id, int value){}
+	public void setField(int id, int value){
+		if(id <= 7)
+			burnTime[id] = value;
+		else if(id <= 14)
+			currentItemBurnTime[id - 7] = value;
+		else if(id == 15)
+			energy = value;
+	}
 
 	@Override
 	public int getFieldCount(){
-		return 0;
+		return 16;
 	}
 
 	@Override
-	public void clear(){}
+	public void clear(){
+		for(int i = 0; i < this.contents.length; i++){
+			contents[i] = null;//It would be great if java provided a simple clear method in the array class.
+		}
+	}
 
 	@Override
 	public String getName(){
@@ -106,8 +124,8 @@ public class TileEntityBasicGenerator extends TileEntityLockable implements ITic
 	}
 
 	@Override
-	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn){
-		return new ContainerBasicGenerator();
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer player){
+		return new ContainerBasicGenerator(playerInventory, this);
 	}
 
 	@Override
@@ -158,7 +176,7 @@ public class TileEntityBasicGenerator extends TileEntityLockable implements ITic
 		
 		this.burnTime = compound.getIntArray("BurnTime");
 		
-		for(int i = 0; i < contents.length; ++i){
+		for(int i = 0; i < contents.length; i++){
 			this.currentItemBurnTime[i] = TileEntityFurnace.getItemBurnTime(this.contents[i]);
 		}
 	}
@@ -169,7 +187,7 @@ public class TileEntityBasicGenerator extends TileEntityLockable implements ITic
 		compound.setIntArray("BurnTime", burnTime);
 		NBTTagList nbttaglist = new NBTTagList();
 		
-		for(int i = 0; i < this.contents.length; ++i){
+		for(int i = 0; i < this.contents.length; i++){
 			if(contents[i] != null){
 				NBTTagCompound nbttagcompound = new NBTTagCompound();
 				nbttagcompound.setByte("Slot", (byte)i);
