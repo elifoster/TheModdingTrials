@@ -90,11 +90,11 @@ public class ContainerBasicGenerator extends Container {
         return this.tileBasicGenerator.isUseableByPlayer(player);
     }
     
-    @Override
+    /*@Override
     @Nullable
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index){//TODO
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index){//What is this for again?
     	ItemStack itemstack = null;
     	Slot slot = (Slot)this.inventorySlots.get(index);
     	return itemstack;
-    }
+    }*/
 }

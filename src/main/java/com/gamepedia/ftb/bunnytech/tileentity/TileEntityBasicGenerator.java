@@ -62,7 +62,7 @@ public class TileEntityBasicGenerator extends TileEntityLockable implements ITic
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer player) {
-        return false;
+        return this.worldObj.getTileEntity(this.pos) == this && player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
     }
 
     @Override
@@ -76,7 +76,6 @@ public class TileEntityBasicGenerator extends TileEntityLockable implements ITic
         return TileEntityFurnace.isItemFuel(stack);
     }
 
-    // Use these instead of the horrible get/setField methods
     public int getBurnTime(int index) {
         return burnTime[index];
     }
@@ -124,9 +123,56 @@ public class TileEntityBasicGenerator extends TileEntityLockable implements ITic
     public String getGuiID() {
         return "bunnytech:basic_generator";
     }
+    
+    public boolean isBurning(int index){
+    	return this.burnTime[index] > 0; //FIXME java.lang.ArrayIndexOutOfBoundsException: 0
+    }
 
     @Override
-    public void update() {}
+    public void update() {
+    	boolean flag1 = false;
+    	for(int i = 0; i < contents.length; i++){
+    		boolean flag = this.isBurning(i);
+    		
+    		if(this.isBurning(i)){
+    			this.burnTime[i]--;
+    		}
+    		
+    		if(!this.worldObj.isRemote){
+    			if(this.isBurning(i) || contents[i] != null){
+    				if(!this.isBurning(i)){
+    					this.burnTime[i] = TileEntityFurnace.getItemBurnTime(this.contents[i]);
+    					this.currentItemBurnTime[i] = this.burnTime[i];
+    					
+    					if(this.isBurning(i)){
+    						flag1 = true;
+    						
+    						if(this.contents[i] != null){
+    							this.contents[i].stackSize--;
+    							
+    							if(this.contents[i].stackSize == 0){
+    								this.contents[i] = this.contents[i].getItem().getContainerItem(this.contents[i]);
+    							}
+    						}
+    					}
+    				}
+    				
+    				if(this.isBurning(i)){
+    					if(this.energy + 20 <= this.getCapacity()){
+    						this.energy += 20; //20*8 T/t
+    						flag1 = true;
+    					}
+    				}
+    			}
+    			
+    			if(flag != this.isBurning(i))
+    				flag1 = true;
+    		}
+    	}
+    	
+    	if(flag1)
+    		this.markDirty();
+    }
 
     @Override
     public long getStoredPower() {
