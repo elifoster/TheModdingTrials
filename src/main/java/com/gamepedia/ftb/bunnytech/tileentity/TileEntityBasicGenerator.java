@@ -24,7 +24,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class TileEntityBasicGenerator extends TileEntityLockable implements ITickable, ITeslaProducer, ITeslaHolder {
     private ItemStack[] contents = new ItemStack[8];
     private int burnTime[] = new int[8];
-    private int currentItemBurnTime[] = new int[8];
+    private int currentItemBurnTime[] = new int[8]; //{0, 0, 0, 0, 0, 0, 0, 0}
     private long energy = 0;
 
     @Override
@@ -158,8 +158,8 @@ public class TileEntityBasicGenerator extends TileEntityLockable implements ITic
     				}
     				
     				if(this.isBurning(i)){
-    					if(this.energy + 20 <= this.getCapacity()){
-    						this.energy += 20; //20*8 T/t
+    					if(this.getEnergy() + 20 <= this.getCapacity()){
+    						this.setEnergy(this.getEnergy() + 20); //20*8 T/t
     						flag1 = true;
     					}
     				}
@@ -176,7 +176,7 @@ public class TileEntityBasicGenerator extends TileEntityLockable implements ITic
 
     @Override
     public long getStoredPower() {
-        return energy;
+        return getEnergy();
     }
 
     @Override
@@ -186,9 +186,9 @@ public class TileEntityBasicGenerator extends TileEntityLockable implements ITic
 
     @Override
     public long takePower(long power, boolean simulated) {
-        if (energy >= power) {
+        if (getEnergy() >= power) {
             if (!simulated) {
-                energy -= power;
+                setEnergy(getEnergy() - power);
             }
             return power;
         }
@@ -237,4 +237,12 @@ public class TileEntityBasicGenerator extends TileEntityLockable implements ITic
 
         return compound;
     }
+
+	public long getEnergy(){
+		return energy;
+	}
+
+	public void setEnergy(long energy){
+		this.energy = energy;
+	}
 }

@@ -9,6 +9,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -82,7 +84,13 @@ public class ContainerBasicGenerator extends Container {
             currentItemBurnTime[j] = generator.getCurrentItemBurnTime(j);
         }
 
-        energy = tileBasicGenerator.getField(15);
+        energy = (int) generator.getEnergy();//tileBasicGenerator.getField(15);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int id, int data){
+    	System.out.println("em?");
+    	this.tileBasicGenerator.setField(id, data);
     }
 
     @Override
