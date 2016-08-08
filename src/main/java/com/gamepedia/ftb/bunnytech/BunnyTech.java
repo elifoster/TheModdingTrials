@@ -1,6 +1,7 @@
 package com.gamepedia.ftb.bunnytech;
 
 import com.gamepedia.ftb.bunnytech.blocks.BlockBasicGenerator;
+import com.gamepedia.ftb.bunnytech.blocks.BlockDirtSlab;
 import com.gamepedia.ftb.bunnytech.container.GuiHandler;
 import com.gamepedia.ftb.bunnytech.items.ItemBunnyTail;
 import com.gamepedia.ftb.bunnytech.proxy.CommonProxy;
@@ -29,6 +30,8 @@ public class BunnyTech {
     
     public static Block BASIC_GENERATOR;
     public static ItemBlock IB_BASIC_GENERATOR;
+    public static Block DIRT_SLAB;
+    public static ItemBlock IB_DIRT_SLAB;
 
     public static Item BUNNY_TAIL;
 
@@ -40,10 +43,14 @@ public class BunnyTech {
         BUNNY_TAIL = new ItemBunnyTail();
         BASIC_GENERATOR = new BlockBasicGenerator();
         IB_BASIC_GENERATOR = new ItemBlock(BASIC_GENERATOR);
+        DIRT_SLAB = new BlockDirtSlab();
+        IB_DIRT_SLAB = new ItemBlock(DIRT_SLAB);
         
         GameRegistry.register(BUNNY_TAIL);
         GameRegistry.register(BASIC_GENERATOR);
         GameRegistry.register(IB_BASIC_GENERATOR.setRegistryName(BASIC_GENERATOR.getRegistryName()));
+        GameRegistry.register(DIRT_SLAB);
+        GameRegistry.register(IB_DIRT_SLAB.setRegistryName(DIRT_SLAB.getRegistryName()));
 
         GameRegistry.registerTileEntity(TileEntityBasicGenerator.class, "basic_generator");
 
