@@ -1,10 +1,18 @@
 package com.gamepedia.ftb.bunnytech.blocks;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import com.gamepedia.ftb.bunnytech.BunnyTech;
 import com.gamepedia.ftb.bunnytech.tileentity.TileEntityBasicGenerator;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -20,9 +28,8 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -37,6 +44,12 @@ public class BlockBasicGenerator extends Block implements ITileEntityProvider {
         setCreativeTab(CreativeTabs.DECORATIONS);
         setHardness(3.5F);
         setSoundType(SoundType.STONE);
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced){
+    	tooltip.add("DO NOT PLACE THIS BLOCK UNLESS YOU WANT YOUR WORLD TO BE CORRUPTED!");
     }
 
     @Override
