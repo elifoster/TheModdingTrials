@@ -14,6 +14,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBunnyTail extends ItemArmor {
     public ItemBunnyTail() {
@@ -24,6 +26,7 @@ public class ItemBunnyTail extends ItemArmor {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped defaultModel) {
         return new ModelBunnyTail();
     }
